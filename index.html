@@ -10,6 +10,10 @@
       href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
       rel="stylesheet"
     />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css"
+      rel="stylesheet"
+    />
     <style>
       body {
         margin: 0;
@@ -53,10 +57,18 @@
         border-radius: 3px;
       }
 
+      .mapboxgl-ctrl-geocoder {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
+        width: 180px;
+      }
+
 /*      #data-credit {
         position: absolute;
         bottom: 30px;
-        left: 10px;
+        left: 10px;s
         background: rgba(255, 255, 255, 0.8);
         padding: 10px;
         font-family: Arial, sans-serif;
@@ -132,77 +144,28 @@
           .addTo(map);
       });
 
-      // // Sample brewery data
-      // const breweries = [
-      //   {
-      //     name: 'Golden Brewery',
-      //     address: '123 Brewery Lane',
-      //     coordinates: [-121.4944, 38.5816],
-      //   },
-      //   {
-      //     name: 'Sacramento Cider Co.',
-      //     address: '456 Apple St.',
-      //     coordinates: [-121.4704, 38.5735],
-      //   },
-      //   {
-      //     name: 'Taproom Tavern',
-      //     address: '789 Taproom Ave.',
-      //     coordinates: [-121.5000, 38.5805],
-      //   },
-      // ];
+      // Add geocoder
+      const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        placeholder: 'Enter a local address',
 
-      // // Create a custom geocoder
-      // class CustomGeocoder {
-      //   constructor(breweries) {
-      //     this.breweries = breweries;
-      //   }
+          // Limit seach results to US.
+        countries: 'us',
 
-      //   onAdd(map) {
-      //     this.container = document.createElement('div');
-      //     this.container.className = 'mapboxgl-ctrl';
-      //     this.container.innerHTML = `
-      //       <input
-      //         type="text"
-      //         id="custom-geocoder"
-      //         placeholder="Enter a brewery name"
-      //         style="width: 250px; padding: 5px;"
-      //       />
-      //     `;
-      //     return this.container;
-      //   }
+          // Use a bounding box to further limit results
+          // to sacramento region
+        bbox: [-122.4, 37.97, -119.566, 39.421]
 
-      //   onRemove() {
-      //     this.container.parentNode.removeChild(this.container);
-      //   }
-      // }
+      });
 
-      // const customGeocoder = new CustomGeocoder(breweries);
+      // Add the geocoder to the map
+      document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-      // // Add the custom geocoder to the map
-      // map.addControl(customGeocoder);
+      // Adjust the width dynamically to fit the placeholder
+      const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
+      geocoderInput.style.width = '100%'; // Allow the input box to stretch
 
-      // // Add event listener for search functionality
-      // document.getElementById('custom-geocoder').addEventListener('input', (e) => {
-      //   const query = e.target.value.toLowerCase();
-
-      //   // Filter for matching breweries
-      //   const matchingBrewery = breweries.find(
-      //     (b) => b.name.toLowerCase() === query
-      //   );
-
-      //   if (matchingBrewery) {
-      //     map.flyTo({
-      //       center: matchingBrewery.coordinates,
-      //       zoom: 14,
-      //       essential: true,
-      //     });
-
-      //     new mapboxgl.Popup()
-      //       .setLngLat(matchingBrewery.coordinates)
-      //       .setHTML(`<b>${matchingBrewery.name}</b><br>${matchingBrewery.address}`)
-      //       .addTo(map);
-      //   }
-      // });
+      
     </script>
   </body>
 </html>
