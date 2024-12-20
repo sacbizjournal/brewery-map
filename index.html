@@ -20,16 +20,6 @@
         padding: 0;
       }
 
-      #sidebar {
-        width: 300px;
-        height: 100vh;
-        background: #f8f8f8;
-        padding: 20px;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-      }
-
       #map {
         position: absolute;
         top: 0;
@@ -62,8 +52,23 @@
         top: 10px;
         left: 10px;
         z-index: 1;
-        width: 180px;
+        width: 160px;
       }
+
+      #resetButton {
+        position: absolute;
+        top: 55px;
+        left: 10px;
+        background: #ffffff;
+        padding: 7px;
+        border-radius: 5px;
+        border: 1.2px solid #333333;
+        cursor: pointer;
+        z-index: 1;
+        font-size: 12px;
+      }
+
+
 
 /*      #data-credit {
         position: absolute;
@@ -82,6 +87,8 @@
     <div id="map"></div>
 
     <div id="geocoder" class="geocoder"></div>
+
+    <button id="resetButton">Reset view</button>
 
     <div class="map-overlay" id="legend">
       <div>
@@ -117,6 +124,43 @@
       // Add zoom and rotation controls to the map.
       map.addControl(new mapboxgl.NavigationControl());
 
+      // Add geocoder
+      const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        placeholder: 'Enter a local address',
+
+          // Limit seach results to US.
+        countries: 'us',
+
+          // Use a bounding box to further limit results
+          // to sacramento region
+        bbox: [-122.4, 37.97, -119.566, 39.421]
+
+      });
+
+      // Add the geocoder to the map
+      document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+      // Get the reset button element
+      const resetButton = document.getElementById('resetButton');
+
+      // Set the default view coordinates and zoom level
+      const defaultCenter = [-121.318, 38.595];
+      const defaultZoom = 8.25;
+      const defaultPitch = 0; // no tilt
+      const defaultBearing = 0; // no rotation
+
+      // Add event listener to reset button
+      resetButton.addEventListener('click', () => {
+        map.flyTo({
+          center: defaultCenter,
+          zoom: defaultZoom,
+          pitch: defaultPitch,
+          bearing: defaultBearing,
+          essential: true, // This ensures that the animation is not interrupted
+        });
+      });
+
       // Add popup for breweries
       map.on('click', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
@@ -143,29 +187,7 @@
           )
           .addTo(map);
       });
-
-      // Add geocoder
-      const geocoder = new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        placeholder: 'Enter a local address',
-
-          // Limit seach results to US.
-        countries: 'us',
-
-          // Use a bounding box to further limit results
-          // to sacramento region
-        bbox: [-122.4, 37.97, -119.566, 39.421]
-
-      });
-
-      // Add the geocoder to the map
-      document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
-      // Adjust the width dynamically to fit the placeholder
-      const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
-      geocoderInput.style.width = '100%'; // Allow the input box to stretch
-
-      
+ 
     </script>
   </body>
 </html>
