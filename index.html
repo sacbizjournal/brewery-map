@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Locally-owned breweries in Sacramento area</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #sidebar {
+        width: 300px;
+        height: 100vh;
+        background: #f8f8f8;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .map-overlay {
+        position: absolute;
+        bottom: 50px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .legend-key {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        border-radius: 3px;
+      }
+
+/*      #data-credit {
+        position: absolute;
+        bottom: 30px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        border-radius: 3px;
+      }*/
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <div id="geocoder" class="geocoder"></div>
+
+    <div class="map-overlay" id="legend">
+      <div>
+        <span class="legend-key" style="background-color: #b8860b;"></span>
+        Beer breweries
+      </div>
+      <div>
+        <span class="legend-key" style="background-color: #8fbc8f;"></span>
+        Cider breweries
+      </div>
+      <div>
+        <span class="legend-key" style="background-color: #2f4f4f;"></span>
+        Taprooms
+      </div>
+    </div>
+
+<!--     <div id="data-credit">
+      <p>
+        Data Credit: Sacramento Business Journal research
+      </p>
+    </div> -->
+
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoibWVuZ3l1YW5kb25nIiwiYSI6ImNtMDVtemowYzBtczQyaW9vb2hkZ3hmY20ifQ.0_OelpvD8lrbwMN3nfzJqw';
+      const map = new mapboxgl.Map({
+        container: 'map', // Specify the container ID
+        style:
+          'mapbox://styles/mengyuandong/cm3rxi9by000p01pz3e6ghcm5', // Specify which map style to use
+        center: [-121.318, 38.595], // Specify the starting position [lng, lat]
+        zoom: 8.25 // Specify the starting zoom
+      });
+
+      // Add zoom and rotation controls to the map.
+      map.addControl(new mapboxgl.NavigationControl());
+
+      // Add popup for breweries
+      map.on('click', function (e) {
+        var features = map.queryRenderedFeatures(e.point, {
+          layers: ['sac-breweries-0zfuoh'] // Update to match the layer ID in your Mapbox style
+        });
+
+        if (!features.length) {
+          return;
+        }
+
+        var feature = features[0];
+
+        new mapboxgl.Popup({ offset: [0, -15] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            '<b>Name: </b>' +
+              feature.properties.name +
+              '<br><b>Address: </b>' +
+              feature.properties.full_address +
+              '<br><b>Website: </b>' +
+              feature.properties.website_url +
+              '<br><b>Phone: </b>' +
+              feature.properties.phone
+          )
+          .addTo(map);
+      });
+
+      // // Sample brewery data
+      // const breweries = [
+      //   {
+      //     name: 'Golden Brewery',
+      //     address: '123 Brewery Lane',
+      //     coordinates: [-121.4944, 38.5816],
+      //   },
+      //   {
+      //     name: 'Sacramento Cider Co.',
+      //     address: '456 Apple St.',
+      //     coordinates: [-121.4704, 38.5735],
+      //   },
+      //   {
+      //     name: 'Taproom Tavern',
+      //     address: '789 Taproom Ave.',
+      //     coordinates: [-121.5000, 38.5805],
+      //   },
+      // ];
+
+      // // Create a custom geocoder
+      // class CustomGeocoder {
+      //   constructor(breweries) {
+      //     this.breweries = breweries;
+      //   }
+
+      //   onAdd(map) {
+      //     this.container = document.createElement('div');
+      //     this.container.className = 'mapboxgl-ctrl';
+      //     this.container.innerHTML = `
+      //       <input
+      //         type="text"
+      //         id="custom-geocoder"
+      //         placeholder="Enter a brewery name"
+      //         style="width: 250px; padding: 5px;"
+      //       />
+      //     `;
+      //     return this.container;
+      //   }
+
+      //   onRemove() {
+      //     this.container.parentNode.removeChild(this.container);
+      //   }
+      // }
+
+      // const customGeocoder = new CustomGeocoder(breweries);
+
+      // // Add the custom geocoder to the map
+      // map.addControl(customGeocoder);
+
+      // // Add event listener for search functionality
+      // document.getElementById('custom-geocoder').addEventListener('input', (e) => {
+      //   const query = e.target.value.toLowerCase();
+
+      //   // Filter for matching breweries
+      //   const matchingBrewery = breweries.find(
+      //     (b) => b.name.toLowerCase() === query
+      //   );
+
+      //   if (matchingBrewery) {
+      //     map.flyTo({
+      //       center: matchingBrewery.coordinates,
+      //       zoom: 14,
+      //       essential: true,
+      //     });
+
+      //     new mapboxgl.Popup()
+      //       .setLngLat(matchingBrewery.coordinates)
+      //       .setHTML(`<b>${matchingBrewery.name}</b><br>${matchingBrewery.address}`)
+      //       .addTo(map);
+      //   }
+      // });
+    </script>
+  </body>
+</html>
