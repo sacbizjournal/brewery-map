@@ -1,5 +1,5 @@
 name,address,city,type,full_address,latitude,longitude,coordinates,website_url,phone,County,Zip,postal_code,State
-5150 Brewing at The Brass Tap Rocklin,5150 Commons Dr. #101,Rocklin,Beer brewery,"5150 Commons Dr. #101, Rocklin",38.801112,-121.208714,"38.801112, -121.208714",brasstaprocklin.com,916-246-2729,Placer County,95677,95677-3925,California
+5150 Brewing at The Brass Tap Rocklin,5150 Commons Dr. #101,Rocklin,Taproom,"5150 Commons Dr. #101, Rocklin",38.801112,-121.208714,"38.801112, -121.208714",brasstaprocklin.com,916-246-2729,Placer County,95677,95677-3925,California
 Alaro Craft Brewery,2004 Capitol Ave.,Sacramento,Beer brewery,"2004 Capitol Ave., Sacramento",38.572963,-121.481232,"38.572963, -121.481232",alarobrewing.com,916-436-7711,Sacramento County,95811,95811,California
 At Ease Brewing,1825 I St.,Sacramento,Beer brewery,"1825 I St., Sacramento",38.578543,-121.480969,"38.578543, -121.480969",ateasebrewing.com,916-431-7940,Sacramento County,95814,95811-3003,California
 Auburn Alehouse,289 Washington St.,Auburn,Beer brewery,"289 Washington St., Auburn",38.895386,-121.078473,"38.895386, -121.078473",auburnalehouse.com,530-885-2537,Placer County,95603,95603-5036,California
@@ -42,7 +42,7 @@ Loomis Basin Brewing Co.,3277 Swetzer Rd.,Loomis,Beer brewery,"3277 Swetzer Rd.,
 Mindscape Fermentations,5424 Crossings Dr.,Rocklin,Beer brewery,"5424 Crossings Dr., Rocklin",38.79977,-121.20325,"38.79977, -121.20325",mindscape-fermentations.com,N/A,Placer County,,,California
 Moksa Brewing Co.,5860 Pacific St.,Rocklin,Beer brewery,"5860 Pacific St., Rocklin",38.781901,-121.242206,"38.781901, -121.242206",moksabrewing.com,916-824-1366,Placer County,95677,95677-3738,California
 Monk's Cellar,240 Vernon St.,Roseville,Beer brewery,"240 Vernon St., Roseville",38.749343,-121.283956,"38.749343, -121.283956",monkscellar.com,916-786-6665,Placer County,95678,95678-2633,California
-Moonraker Brewing Co. (The Pub),12970 Earhart Ave. #100,Auburn,Taproom,"12970 Earhart Ave. #100, Auburn",38.950478,-121.081569,"38.950478, -121.081569",moonrakerbrewing.com/thepub,530-745-6816,Placer County,95602,95602-9022,California
+Moonraker Brewing Co. (The Pub),12970 Earhart Ave. #100,Auburn,Taproom only,"12970 Earhart Ave. #100, Auburn",38.950478,-121.081569,"38.950478, -121.081569",moonrakerbrewing.com/thepub,530-745-6816,Placer County,95602,95602-9022,California
 Moonraker Brewing Co. (Production Facility),2349 Rickenbacker Way,Auburn,Beer brewery,"2349 Rickenbacker Way, Auburn",38.951588,-121.08139,"38.951588, -121.08139",moonrakerbrewing.com,530-745-6816,Placer County,95602,95602,California
 Moonraker Brewing Co. (Millhouse),3501 Robin Lane,Cameron Park,Taproom,"3501 Robin Lane, Cameron Park",38.655995,-120.964854,"38.655995, -120.964854",moonrakerbrewing.com/millhouse,530-745-6816,,,,California
 Boring Rose Brewing,4363 Town Center Blvd. #110,El Dorado Hills,Beer brewery,"4363 Town Center Blvd. #110, El Dorado Hills",38.651841,-121.06622,"38.651841, -121.06622",boringrose.com,916-933-2410,El Dorado County,,95762-7184,California
@@ -91,3 +91,4 @@ Capitol Beer and Tap Room,2222 Fair Oaks Blvd.,Sacramento,Taproom,"2222 Fair Oak
 Sac City Brews,3940 60th St.,Sacramento,Taproom,"3940 60th St., Sacramento",38.538778,-121.434938,"38.538778, -121.434938",saccitybrews.com,916-400-4109,,,,California
 SacYard Community Tap House,1725 33rd St.,Sacramento,Taproom,"1725 33rd St., Sacramento",38.564381,-121.465619,"38.564381, -121.465619",sacyard.beer,916-400-4708,,,,California
 DarkHeart Brewing,7110 Auburn Blvd. ,Citrus Heights,Beer brewery,"7110 Auburn Blvd., Citrus Heights",38.695629086139114,-121.28965983229952,"38.695629086139114, -121.28965983229952",darkheartbrewing.com,209-629-3366,,,,
+Out of Bounds Brewing Co.,13407 folsom Blvd.,Folsom,Taproom,"13407 folsom blvd., Folsom",38.658372,-121.183563,38.658372 -121.183563,outofboundsbrewing.com,916-357-5250,Sacramento County,,,
